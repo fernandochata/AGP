@@ -454,6 +454,48 @@ public class UsuarioDAO{
         
     }
     
+    public int obtener_dias_legales(Date fechaContrato) throws Exception
+    {
+        int diasLegales = 0;
+        try
+        {
+            CallableStatement proc = c.getConexion().prepareCall("CALL PR_OBTENER_DIAS_LEGALES(?,?)");
+            proc.setDate("p_fecha_contrato",fechaContrato);
+            proc.registerOutParameter("p_dias_legales",Types.NUMERIC);
+            proc.execute();
+            diasLegales = proc.getInt("p_dias_legales");
+        }catch(SQLException ex)
+        {
+            throw new Exception(ex.getMessage());
+        }
+        return diasLegales;
+    }
+    
+    public boolean validarRutRepetido(int rut) throws Exception //ESTE METODO VALIDA SI EL RUT INGRESADO EN EL FORMULARIO, YA EXISTE EN LA BD AL MOMENTO DE REGISTRAR Y EDITAR
+    {
+      boolean existe = false; //BOOLEANO A RETORNAR
+      int rutExistente  = 0; //VARIABLE QUE REGISTRA EL RUT A BUSCAR
+      String sql; //SENTENCIA SQL
+      ResultSet dato; //PARA EJECUTAR EL SQL
+      try
+      {
+          sql = "SELECT rut FROM USUARIOS WHERE rut LIKE "+rut+" "; //SELECT QUE RETORNA EL RUT, EN BASE AL RUT INGRESADO POR PARAMETRO
+          dato = instru.executeQuery(sql); //EJECUTAMOS EL SQL
+          while(dato.next()) //RECORRIMOS EL RESULTADO
+          {
+              rutExistente = dato.getInt("rut"); //LE  ASIGNAMOS A LA VARIABLE EL RUT ENCONTRADO
+          }
+          if(rutExistente == rut) //VALIDAMOS QUE EL RUT ENCONTRADO SEA IGUAL AL INGRESADO
+          {
+              existe = true; //CAMBIAMOS EL BOOLEANO A TRUE, SIGNIFICA QUE ESTA REPETIDO
+          }
+      }catch(SQLException ex)
+      {
+          throw new Exception(ex.getMessage());
+      }
+      return existe; //RETORNAMOS EL BOOLENAO
+    }
+    
    /*public static void main(String[]args) throws Exception
     {
         try

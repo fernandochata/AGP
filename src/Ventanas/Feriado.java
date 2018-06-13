@@ -42,7 +42,7 @@ public class Feriado extends javax.swing.JFrame {
         setVisible(true); //HACEMOS VISIBLE LA VENTANA MOTIVO
         setResizable(false);  //Deshabilita modificar el tamaño de la pantalla
         setIconImage(new ImageIcon(getClass().getResource("/Imagen/LogoSGP.PNG")).getImage()); //ESTABLECER ICONO DEL SW
-        //mostrar_registros();
+        mostrar_registros();
         editar_forma_tabla(); //PARA EDITAR LA TABLA
         JMItem.addActionListener((new ActionListener() {
         @Override
@@ -149,19 +149,23 @@ public class Feriado extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel1.setText("Feridado:");
 
+        cFeriado.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel2.setText("*");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel3.setText("Descripción:");
 
         txtDescripcion.setColumns(20);
+        txtDescripcion.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         txtDescripcion.setRows(5);
         jScrollPane1.setViewportView(txtDescripcion);
 
-        btnRegistrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnRegistrar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/save-16.png"))); // NOI18N
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +179,7 @@ public class Feriado extends javax.swing.JFrame {
             }
         });
 
-        btnEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEditar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/available-updates-16.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +193,7 @@ public class Feriado extends javax.swing.JFrame {
             }
         });
 
-        btnMostrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnMostrar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnMostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/pages-3-16.png"))); // NOI18N
         btnMostrar.setText("Mostrar");
         btnMostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +207,7 @@ public class Feriado extends javax.swing.JFrame {
             }
         });
 
-        btnLimpiar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnLimpiar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/undo-16.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -217,6 +221,7 @@ public class Feriado extends javax.swing.JFrame {
             }
         });
 
+        tTabla.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         tTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -230,6 +235,7 @@ public class Feriado extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tTabla);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel4.setText("*");
 
         jMenu3.setText("Sistema");
@@ -316,20 +322,18 @@ public class Feriado extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cFeriado, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel4)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1))
-                        .addGap(18, 18, 18)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addGap(0, 164, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cFeriado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -346,8 +350,8 @@ public class Feriado extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
                             .addComponent(cFeriado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -357,7 +361,9 @@ public class Feriado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRegistrar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRegistrar)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -367,8 +373,8 @@ public class Feriado extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -476,17 +482,20 @@ public class Feriado extends javax.swing.JFrame {
         f.setFeriado(new java.sql.Date(cFeriado.getDate().getTime()));
         f.setDescripcion(txtDescripcion.getText());
         
-        //REGISTRAMOS EL NUEVO USUARIO
-        JOptionPane.showMessageDialog(null,dao.registrar_feriado(f));
+        //REGISTRAMOS EL NUEVO FERIADO
+            
+        JOptionPane.showMessageDialog(null,dao.registrar_feriado(f).substring(0,29));
         
         //LIMPIAR EL FORMULARIO
+
         limpiar();
         mostrar_registros();
         cFeriado.requestFocus();
+              
        
     }catch(Exception ex)
     {
-        
+        JOptionPane.showMessageDialog(null,"Problemas al registrar el Feriado, compruebe que no este repetido"); //POR RESOLVER
     }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -523,7 +532,7 @@ public class Feriado extends javax.swing.JFrame {
         f.setDescripcion(txtDescripcion.getText());
         
         //REGISTRAMOS EL NUEVO USUARIO
-        JOptionPane.showMessageDialog(null,dao.editar_feriado(f));
+        JOptionPane.showMessageDialog(null,dao.editar_feriado(f).substring(0,17)+" editado");
         
         //LIMPIAR EL FORMULARIO
         limpiar();

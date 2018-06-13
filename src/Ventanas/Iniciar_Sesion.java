@@ -8,6 +8,7 @@ package Ventanas;
 import Modelo.DAO.UsuarioDAO;  //PAQUETE ModeloDAO
 import Modelo.DTO.Usuario; //PAQUETE ModeloDTO
 import com.placeholder.PlaceHolder; //LIBRERIA PLACEHOLDER PARA JAVA JFRAME
+import java.awt.Dimension;
 import java.util.ArrayList; //PAQUUETE PARA LOS ARRAY LIST
 import javax.swing.ImageIcon; //PAQUETE PARA USAR LAS IMAGENES
 import javax.swing.JOptionPane; //PAQUETE PARA VENTANAS EMERGENTES
@@ -28,7 +29,8 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
     
     public Iniciar_Sesion() {
         initComponents();
-        PlaceHolder holder = new PlaceHolder(txtUsua, "Sin CV EJ: 11111111"); //PARA AÑADIR UN PLACEHOLDER
+        this.setMinimumSize(new Dimension(550, 200)); 
+        PlaceHolder holder = new PlaceHolder(txtUsua, "Sin CV"); //PARA AÑADIR UN PLACEHOLDER
         setIconImage(new ImageIcon(getClass().getResource("/Imagen/LogoSGP.PNG")).getImage()); //ESTABLECER ICONO DEL SW
         btnIngresar.requestFocusInWindow(); //PARA HACER FOCUS AL BOTON "INGRESAR"
     }
@@ -53,14 +55,16 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
         txtContra = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Administración Gestión Permiso (AGP)");
+        setTitle("Administración Gestión Permiso ");
+        setSize(new java.awt.Dimension(1280, 720));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setText("Usuario:");
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        jLabel1.setText("R.U.N:");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel2.setText("Contraseña:");
 
+        txtUsua.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         txtUsua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuaActionPerformed(evt);
@@ -72,7 +76,7 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
             }
         });
 
-        btnIngresar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnIngresar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/login-16.png"))); // NOI18N
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,9 +92,13 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/LogoSGP.PNG"))); // NOI18N
 
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel4.setText("*");
 
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel5.setText("*");
+
+        txtContra.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,15 +120,12 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -128,13 +133,17 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
                             .addComponent(txtUsua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel5))
+                            .addComponent(txtContra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnIngresar)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(btnIngresar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -149,13 +158,13 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
     {
         if(txtUsua.getText().isEmpty()) //VALIDA SI EL txtUsua esta vacio
         {
-             JOptionPane.showMessageDialog(null,"Ingrese Un Usuario"); //GATILLA MENSAJE DE ERROR
+             JOptionPane.showMessageDialog(null,"Ingrese Rut"); //GATILLA MENSAJE DE ERROR
              txtUsua.requestFocus(); //LA APLICACION FOCUSEA EL CAMPO DE ENTRADA
              throw new Exception(); //SE EJECUTA UNA EXCEPCION, POR ENDE SE DETIENE EN ESTE PUNTO
         }
         if(txtUsua.getText().length()>=11) //VALIDA SI EL txtUsua es mayor a 11 caracteres
         {
-            JOptionPane.showMessageDialog(null,"Ingrese Un Rut Valido (Sin V)"); //GATILLA MENSAJE DE ERROR
+            JOptionPane.showMessageDialog(null,"Ingrese Un Rut Valido (Sin CV)"); //GATILLA MENSAJE DE ERROR
             txtUsua.requestFocus(); //LA APLICACION FOCUSEA EL CAMPO DE ENTRADA
             throw new Exception(); //SE EJECUTA UNA EXCEPCION, POR ENDE SE DETIENEN EN ESTE PUNTO
         }
@@ -185,7 +194,7 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
         
     }catch(Exception e)
     {
-        JOptionPane.showMessageDialog(null,"Algo esta fallando");
+        //JOptionPane.showMessageDialog(null,"Algo esta fallando");
         //ESTA LINEA SE GATILLA CUANDO INGRESO UN RUT MAYOR A 10 CARACTERES, ENTRE OTRAS COSAS, E DECIDO
         //COMENTARLO, PUESTO QUE ESTAN CONTROLADO LOS ERRORES QUE SE PUEDEN GATILLAR
     }

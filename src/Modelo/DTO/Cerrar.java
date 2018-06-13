@@ -19,7 +19,7 @@ public class Cerrar {
     public void cerrar(){ //METODO CERRAR
         Component rootPane = null; //ATRIBUTO DE TIPO COMPONENT INICIADO
         Object [] opciones ={"Aceptar","Cancelar"}; //OBJETOS, LAS OPCIONES DEL JPANEL
-        int eleccion = JOptionPane.showOptionDialog(rootPane,"En realidad desea cerrar la aplicacion","Mensaje de Confirmacion", //MENSAJES DE LA VENTANA Y EL COMPONENTE VENTANA
+        int eleccion = JOptionPane.showOptionDialog(rootPane,"En realidad desea cerrar la aplicación","Mensaje de Confirmación", //MENSAJES DE LA VENTANA Y EL COMPONENTE VENTANA
         JOptionPane.YES_NO_OPTION, //SOLO SE PUEDE SALIR CON UNA OPCION
         JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar"); //RECOJE LO SELECCIONADO
         if (eleccion == JOptionPane.YES_OPTION) //VALIDA SI ELEJIMOS ACEPTAR

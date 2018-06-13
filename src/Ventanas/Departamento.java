@@ -33,6 +33,7 @@ public class Departamento extends javax.swing.JFrame {
         txtId.setEditable(false); //PARA BLOQUEAR LA MODIFICACION DEL TEXTO
         txtId.setVisible(false); //PARA DEVER INVISIBLE EL TXTID
         //llenar_tabla(); //PARA LLENAR FORMULARIO DESDE LA TABLA
+        mostrar_registros();
         popup.add(JMItem); //Agregar el MenuItem al Popup
         tUnidad.setComponentPopupMenu(popup); //AGREGAMOE EL MENU ITEM A LA TABLA
         taDescripcion.setLineWrap(true); // Para que haga el salto de línea en cualquier parte de la palabra: 
@@ -76,7 +77,7 @@ public class Departamento extends javax.swing.JFrame {
         {
             DefaultTableModel dtm = new DefaultTableModel();
             tUnidad.setModel(dtm);
-            dtm.setColumnIdentifiers(new Object[]{"Id Departamento","Departamento","Descripcion"});
+            dtm.setColumnIdentifiers(new Object[]{"Id Departamento","Departamento","Descripción"});
             editar_forma_tabla();
             DepartamentoDAO dao = new DepartamentoDAO();
             ArrayList<Modelo.DTO.Departamento> dato;
@@ -138,6 +139,7 @@ public class Departamento extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tUnidad = new javax.swing.JTable();
         txtId = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jmMenu = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jmInicio = new javax.swing.JMenuItem();
@@ -157,15 +159,19 @@ public class Departamento extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel1.setText("Departamento:");
 
+        txtDepartamento.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel2.setText("*");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel4.setText("Descripción:");
 
         taDescripcion.setColumns(20);
+        taDescripcion.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         taDescripcion.setRows(5);
         taDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -174,7 +180,7 @@ public class Departamento extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(taDescripcion);
 
-        btnBuscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnBuscar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/search-3-16.png"))); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +194,7 @@ public class Departamento extends javax.swing.JFrame {
             }
         });
 
-        btnRegistrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnRegistrar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/save-16.png"))); // NOI18N
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +208,7 @@ public class Departamento extends javax.swing.JFrame {
             }
         });
 
-        btnEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEditar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/available-updates-16.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -216,7 +222,7 @@ public class Departamento extends javax.swing.JFrame {
             }
         });
 
-        btnMostrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnMostrar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnMostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/pages-3-16.png"))); // NOI18N
         btnMostrar.setText("Mostrar");
         btnMostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -230,7 +236,7 @@ public class Departamento extends javax.swing.JFrame {
             }
         });
 
-        btnLimpiar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnLimpiar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/undo-16.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -244,6 +250,7 @@ public class Departamento extends javax.swing.JFrame {
             }
         });
 
+        tUnidad.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         tUnidad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -264,6 +271,9 @@ public class Departamento extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tUnidad);
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        jLabel3.setText("*");
 
         jMenu3.setText("Sistema");
 
@@ -347,15 +357,18 @@ public class Departamento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane1))
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -373,24 +386,25 @@ public class Departamento extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(btnBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistrar)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(btnBuscar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRegistrar)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnMostrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnLimpiar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -498,7 +512,7 @@ public class Departamento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,lista.get(0).getResultado());
         }else
         {
-            JOptionPane.showMessageDialog(null,"No se encontro departamento"); //GATILLA MENSAJE DE ERROR
+            JOptionPane.showMessageDialog(null,"No se encontró departamento"); //GATILLA MENSAJE DE ERROR
             txtDepartamento.requestFocus(); //LA APLICACION FOCUSEA EL CAMPO DE ENTRADA
             throw new Exception(); //SE EJECUTA UNA EXCEPCION, POR ENDE SE DETIENE EN ESTE PUNTO
         }
@@ -532,7 +546,7 @@ public class Departamento extends javax.swing.JFrame {
         }
         if(taDescripcion.getText().length()>300)
         {
-            JOptionPane.showMessageDialog(null,"Descripcion no puede superar los 300 caracteres"); //GATILLA MENSAJE DE ERROR
+            JOptionPane.showMessageDialog(null,"Descripción no puede superar los 300 caracteres"); //GATILLA MENSAJE DE ERROR
             taDescripcion.requestFocus(); //LA APLICACION FOCUSEA EL CAMPO DE ENTRADA
             throw new Exception(); //SE EJECUTA UNA EXCEPCION, POR ENDE SE DETIENE EN ESTE PUNTO
         }
@@ -581,7 +595,7 @@ public class Departamento extends javax.swing.JFrame {
         }
         if(taDescripcion.getText().length()>300)
         {
-            JOptionPane.showMessageDialog(null,"Descripcion no puede superar los 300 caracteres"); //GATILLA MENSAJE DE ERROR
+            JOptionPane.showMessageDialog(null,"Descripción no puede superar los 300 caracteres"); //GATILLA MENSAJE DE ERROR
             taDescripcion.requestFocus(); //LA APLICACION FOCUSEA EL CAMPO DE ENTRADA
             throw new Exception(); //SE EJECUTA UNA EXCEPCION, POR ENDE SE DETIENE EN ESTE PUNTO
         }
@@ -666,6 +680,7 @@ public class Departamento extends javax.swing.JFrame {
     private javax.swing.ButtonGroup estado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;

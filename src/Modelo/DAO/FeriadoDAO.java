@@ -21,7 +21,7 @@ import oracle.jdbc.OracleTypes;
  *
  * @author Angelo
  */
-public class FeriadoDAO {
+public class FeriadoDAO  {
     private Statement instru; //VARIABLE PARA EJECUTAR INSTRUCCIONES
     Conexion c;
     
@@ -116,8 +116,8 @@ public class FeriadoDAO {
             {
                 Feriado f = new Feriado(); //CLASE TIPO, !!NO MOVER!!
                 int contador  = 0 ;
-                f.setIdFeriado(resul.getInt("id_feriados"));
-                f.setFeriado(resul.getDate("feriados"));
+                f.setIdFeriado(resul.getInt("id_feriado"));
+                f.setFeriado(resul.getDate("feriado"));
                 f.setDescripcion(resul.getString("descripcion")); 
                 lista.add(contador,f);
                 contador ++;
@@ -128,6 +128,31 @@ public class FeriadoDAO {
         }
         return lista;
         
+    }
+    
+    public boolean validarFeriadoRepetido(Date feriado) throws Exception //ESTE METODO VALIDA SI EL RUT INGRESADO EN EL FORMULARIO, YA EXISTE EN LA BD AL MOMENTO DE REGISTRAR Y EDITAR
+    {
+      boolean existe = false; //BOOLEANO A RETORNAR
+      Date fechaExistente  = null; //VARIABLE QUE REGISTRA EL RUT A BUSCAR
+      String sql; //SENTENCIA SQL
+      ResultSet dato; //PARA EJECUTAR EL SQL
+      try
+      {
+          sql = "SELECT FERIADO FROM FERIADOS WHERE FERIADO LIKE '31-03-18%' "; //SELECT QUE RETORNA EL RUT, EN BASE AL RUT INGRESADO POR PARAMETRO
+          dato = instru.executeQuery(sql); //EJECUTAMOS EL SQL
+          while(dato.next()) //RECORRIMOS EL RESULTADO
+          {
+              fechaExistente = dato.getDate("feriado"); //LE  ASIGNAMOS A LA VARIABLE EL RUT ENCONTRADO
+          }
+          if(fechaExistente.equals(feriado)) //VALIDAMOS QUE EL RUT ENCONTRADO SEA IGUAL AL INGRESADO
+          {
+              existe = true; //CAMBIAMOS EL BOOLEANO A TRUE, SIGNIFICA QUE ESTA REPETIDO
+          }
+      }catch(SQLException ex)
+      {
+          throw new Exception(ex.getMessage());
+      }
+      return existe; //RETORNAMOS EL BOOLENAO
     }
     
 }

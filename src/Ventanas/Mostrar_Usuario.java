@@ -33,15 +33,11 @@ public class Mostrar_Usuario extends javax.swing.JDialog {
      * Creates new form Mostrar_Usuario
      */
     static JFrame formulario_usuario;
-    JPopupMenu popup = new JPopupMenu(); //VENTANA PARA HACER CLIC DERECHO A UNA FILA DE LA TABLA
-    JMenuItem JMItem = new JMenuItem("Llenar A Formulario"); //TEXTO DE LA VENTANA
     private final String ruta = System.getProperties().getProperty("user.dir"); //LA VARIABLE RUTA DEL PEOYECTO
     
     public Mostrar_Usuario(java.awt.Frame parent, boolean modal,JFrame Usuario) {
         super(parent, modal);
         initComponents();
-        popup.add(JMItem);
-        tUsuario.setComponentPopupMenu(popup);
         setLocationRelativeTo(null); //CENTRADO
         setIconImage(new ImageIcon(getClass().getResource("/Imagen/LogoSGP.PNG")).getImage()); //ASIGNAMOS ICONO
         formulario_usuario = Usuario; //RESCATAMOS EL FORMULARIO
@@ -55,7 +51,7 @@ public class Mostrar_Usuario extends javax.swing.JDialog {
         {
             DefaultTableModel dtm = new DefaultTableModel();
             tUsuario.setModel(dtm);
-            dtm.setColumnIdentifiers(new Object[]{"Rut","Verificador","Clave","Nombre","Paterno","Materno",
+            dtm.setColumnIdentifiers(new Object[]{"R.U.N","Verificador","Nombre","Paterno","Materno",
                                                   "Direccion","Comuna",
                                                   "Telefono","Email","Dias Legales","Dias Administrativo",
                                                   "Fecha Contrato","Perfil","Cargo","Departamento"});
@@ -66,7 +62,6 @@ public class Mostrar_Usuario extends javax.swing.JDialog {
             {
                 dtm.addRow(new Object[]{dato.get(i).getRut(),
                                         dato.get(i).getCodigo_verificado(),
-                                        dato.get(i).getClave(),
                                         dato.get(i).getNombre(),
                                         dato.get(i).getApellido_paterno(),
                                         dato.get(i).getApellido_materno(),
@@ -105,7 +100,9 @@ public class Mostrar_Usuario extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administración Gestión Permiso (AGP)");
+        setPreferredSize(new java.awt.Dimension(1280, 720));
 
+        tUsuario.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         tUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -119,7 +116,7 @@ public class Mostrar_Usuario extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tUsuario);
 
-        btnExportar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnExportar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/excel-16.png"))); // NOI18N
         btnExportar.setText("Exportar");
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
@@ -155,8 +152,8 @@ public class Mostrar_Usuario extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(btnExportar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(barra_progreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -180,20 +177,19 @@ public class Mostrar_Usuario extends javax.swing.JDialog {
               //COLUMNAS DEL EXCEL
               fila.createCell(0).setCellValue("Rut"); //CREAMOS UNA CELDA, LE ASIGNAMOS UN NOMBRE
               fila.createCell(1).setCellValue("Codifo Verificador");
-              fila.createCell(2).setCellValue("Clave");
-              fila.createCell(3).setCellValue("Nombre");
-              fila.createCell(4).setCellValue("Apellido Paterno");
-              fila.createCell(5).setCellValue("Apellido Materno");
-              fila.createCell(6).setCellValue("Direccion");
-              fila.createCell(7).setCellValue("Comuna");
-              fila.createCell(8).setCellValue("Telefono");
-              fila.createCell(9).setCellValue("Email");
-              fila.createCell(10).setCellValue("Dias Legales");
-              fila.createCell(11).setCellValue("Dias Administrativos");
-              fila.createCell(12).setCellValue("Fecha Contrato");
-              fila.createCell(13).setCellValue("Perfil");
-              fila.createCell(14).setCellValue("Cargo");
-              fila.createCell(15).setCellValue("Departamento");
+              fila.createCell(2).setCellValue("Nombre");
+              fila.createCell(3).setCellValue("Apellido Paterno");
+              fila.createCell(4).setCellValue("Apellido Materno");
+              fila.createCell(5).setCellValue("Direccion");
+              fila.createCell(6).setCellValue("Comuna");
+              fila.createCell(7).setCellValue("Telefono");
+              fila.createCell(8).setCellValue("Email");
+              fila.createCell(9).setCellValue("Dias Legales");
+              fila.createCell(10).setCellValue("Dias Administrativos");
+              fila.createCell(11).setCellValue("Fecha Contrato");
+              fila.createCell(12).setCellValue("Perfil");
+              fila.createCell(13).setCellValue("Cargo");
+              fila.createCell(14).setCellValue("Departamento");
               
               barra_progreso.setMaximum(tUsuario.getRowCount()); //LE ASIGNAMOS UN VALOR MAXIMO A LA BARRA DE PROGRESOM , QUE ES LA CANTIDAD DE FILAS DE LA TABLA
               XSSFRow filas; //SE CARGAN LOS DATOS DEL JTABLE
@@ -318,13 +314,6 @@ public class Mostrar_Usuario extends javax.swing.JDialog {
                   }else
                   {
                       filas.createCell(14).setCellValue(tUsuario.getValueAt(i, 14).toString());
-                  }
-                  if(tUsuario.getValueAt(i, 15)==null)
-                  {
-                      filas.createCell(15).setCellValue("NO HAY DATOS");
-                  }else
-                  {
-                      filas.createCell(15).setCellValue(tUsuario.getValueAt(i, 15).toString());
                   }
                   //OJO LAS COLUMNAS NO DEBEN IR VACIAS
                   try

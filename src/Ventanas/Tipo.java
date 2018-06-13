@@ -57,6 +57,7 @@ public class Tipo extends javax.swing.JFrame {
     {
         try
         {
+            String estado = "Sin estado definido"; //VARIABLE PARA DESCRIBIR EL TIPO 1 = HABILITADO, 0 = DESHABILITADO
             DefaultTableModel dtm = new DefaultTableModel();
             dtm.setColumnIdentifiers(new Object[]{"Id Tipo","Tipo","Dias","Estado","Descripcion"});
             tTipo.setModel(dtm);
@@ -66,11 +67,20 @@ public class Tipo extends javax.swing.JFrame {
             dato = dao.obtener_tipo_permisos();
             for(int i=0; i<dato.size(); i++)
             {
+                //VALIDAMOS EL ESTADO DEL PERMISO
+                if(dato.get(i).get_estado_tipo()==1)
+                {
+                    estado = "Habilitado"; //LE ASIGNAMOS HABILITADO
+                }else if(dato.get(i).get_estado_tipo()==0)
+                {
+                    estado = "Deshabilitado"; //LE ASIGNAMOS DESHABILITADO
+                }
                 dtm.addRow(new Object[]{dato.get(i).get_id_tipo(), //LLENAMOS LA TABLA, ID
                                         dato.get(i).get_tipo(), //TIPO
                                         dato.get(i).get_dias(), //DIAS
-                                        dato.get(i).get_estado_tipo(), //ESTADO TIPO
+                                        /*dato.get(i).get_estado_tipo()*/estado, //ESTADO TIPO
                                         dato.get(i).get_descripcion()}); //DESCRIPCION
+                estado = "Sin estado definido"; //VUELVO A ASIGNARLE ESTE VALOR POR SI ABC MOTIVO ALGUIEN CON ACCESO A LA BASE DE DATOS, MODIFICA EL TIPO DE UN PERMISO CON UN NUMERO DISTINTO DE 1 O 0
             }
         }catch(Exception ex)
         {
@@ -115,7 +125,7 @@ public class Tipo extends javax.swing.JFrame {
         tTipo.getColumnModel().getColumn(2).setMaxWidth(50);
         tTipo.getColumnModel().getColumn(2).setMinWidth(50);
         tTipo.getColumnModel().getColumn(2).setPreferredWidth(0);
-        tTipo.getColumnModel().getColumn(3).setMaxWidth(70);
+        tTipo.getColumnModel().getColumn(3).setMaxWidth(120);
         tTipo.getColumnModel().getColumn(3).setMinWidth(70);
         tTipo.getColumnModel().getColumn(3).setPreferredWidth(0);
         tTipo.getColumnModel().getColumn(4).setPreferredWidth(0);
@@ -160,6 +170,7 @@ public class Tipo extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tTipo = new javax.swing.JTable();
         txtId = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         jmMenu = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jmInicio = new javax.swing.JMenuItem();
@@ -179,37 +190,43 @@ public class Tipo extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel1.setText("Tipo:");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel2.setText("Dias:");
 
+        txtTipo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        txtDias.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         txtDias.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDiasKeyTyped(evt);
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel3.setText("*");
 
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel4.setText("*");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel5.setText("Estado:");
 
         grupoEstado.add(rbHabilitado);
-        rbHabilitado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rbHabilitado.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         rbHabilitado.setText("Habilitado");
 
         grupoEstado.add(rbDeshabilitado);
-        rbDeshabilitado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rbDeshabilitado.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         rbDeshabilitado.setText("Deshabilitado");
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel6.setText("Descripción:");
 
         taDescripcion.setColumns(20);
+        taDescripcion.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         taDescripcion.setRows(5);
         taDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -218,7 +235,7 @@ public class Tipo extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(taDescripcion);
 
-        btnRegistrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnRegistrar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/save-16.png"))); // NOI18N
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -232,7 +249,7 @@ public class Tipo extends javax.swing.JFrame {
             }
         });
 
-        btnEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEditar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/available-updates-16.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +263,7 @@ public class Tipo extends javax.swing.JFrame {
             }
         });
 
-        btnLimpiar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnLimpiar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/undo-16.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -260,7 +277,7 @@ public class Tipo extends javax.swing.JFrame {
             }
         });
 
-        btnBuscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnBuscar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/search-3-16.png"))); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -274,7 +291,7 @@ public class Tipo extends javax.swing.JFrame {
             }
         });
 
-        btnMostrar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnMostrar.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnMostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/pages-3-16.png"))); // NOI18N
         btnMostrar.setText("Mostrar");
         btnMostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -288,6 +305,7 @@ public class Tipo extends javax.swing.JFrame {
             }
         });
 
+        tTipo.setFont(new java.awt.Font("Arial", 0, 17)); // NOI18N
         tTipo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -308,6 +326,9 @@ public class Tipo extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tTipo);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel7.setText("*");
 
         jMenu3.setText("Sistema");
 
@@ -391,37 +412,39 @@ public class Tipo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel1)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(22, 22, 22)
-                                            .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel3)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(rbHabilitado)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(rbDeshabilitado)))
-                            .addComponent(jLabel6)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDias))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rbHabilitado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rbDeshabilitado))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7))
+                            .addComponent(jScrollPane1))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnMostrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnLimpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                    .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                                     .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
@@ -439,10 +462,11 @@ public class Tipo extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
                     .addComponent(btnRegistrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,7 +476,9 @@ public class Tipo extends javax.swing.JFrame {
                             .addComponent(rbHabilitado)
                             .addComponent(rbDeshabilitado))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -832,6 +858,7 @@ public class Tipo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JScrollPane jScrollPane1;

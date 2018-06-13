@@ -46,13 +46,14 @@ public class Cerrar_Sesion extends javax.swing.JDialog {
         btnNo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Administración Gestión Permisos (AGP)");
+        setTitle("Administración Gestión Permisos");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/LogoSGP.PNG"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel2.setText("¿Cerrar la Sesión?");
 
+        btnSi.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnSi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ok-16.png"))); // NOI18N
         btnSi.setText("Si");
         btnSi.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +67,7 @@ public class Cerrar_Sesion extends javax.swing.JDialog {
             }
         });
 
+        btnNo.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnNo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/cancel-16.png"))); // NOI18N
         btnNo.setText("No");
         btnNo.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +88,7 @@ public class Cerrar_Sesion extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSi)
