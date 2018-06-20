@@ -25,78 +25,51 @@ import javax.mail.internet.MimeMessage;
  */
 public class Correo {
  
-    private static String dt = "tanufuki@gmail.com",
-            usuarioMail = "tanufuki@gmail.com" ,
-            mensajeMail = "Que pasooo";
+    private static String remitente;
+    private static String clave;
     
-    public static boolean sendMessage(String mensaje , String subject , String correo)
+    public static void enviarConGmail(String destinatario, String asunto, String cuerpo, String clave)
     {
-        boolean rpta = false;
-        dt = "tanufuki@gmail.com";
+        // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
+        remitente = "sistemagestionpermisos@gmail.com"; // Esto es mi correo, puede que funcione al quitar el 'gmail.com'
+        clave = "sgpadmin";
         
-        Properties props = new Properties();
-        //Nombre del host de correo, es smtp.gmail.com
-        props.setProperty("mail.smtp.host","smtp.gmail.com");
-        //TLS Si esta disponible
-        props.setProperty("mail.smtp.starttls.enable", "true");
-        // Puerto de gmail para envio de correos
-        props.setProperty("mail.smtp.port", "587");
-        // Cuenta de correo en gmail
-        props.setProperty("mail.smtp.user", dt);
-        // Si requiere o no usuario y password para conectarse.
-        props.setProperty("mail.smtp.auth", "true");
+        
+        Properties props = System.getProperties();
+        props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
+        props.put("mail.smtp.user", remitente);
+        props.put("mail.smtp.clave", "sgpadmin");    //La clave de la cuenta
+        props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
+        props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
+        props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+        
         Session session = Session.getDefaultInstance(props);
-        //Verficiar el envio
-        session.setDebug(true);
         MimeMessage message = new MimeMessage(session);
-        try {
-        message.setSubject(subject);
-        message.setText(mensaje);
-        Address address;
-        try {
-        address = new InternetAddress(dt,subject);
-        message.setFrom(address);
-        } catch (UnsupportedEncodingException ex) {
-        //Logger.getLogger(form1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //La direccion de la persona a enviar
-        Address address2 = new InternetAddress(correo,false);
-        message.addRecipient(Message.RecipientType.TO,address2);
-        Transport t = session.getTransport("smtp");
-        t.connect(dt,"angelo25.");
-        t.sendMessage(message,message.getAllRecipients());
-        t.close();
-        rpta=true;
-        } catch (MessagingException ex) {
-        return rpta;
-        }
-        return rpta;
         
+        try {
+            message.setFrom(new InternetAddress(remitente));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));   //Se podrían añadir varios de la misma manera
+            message.setSubject(asunto);
+            //message.setText(cuerpo);
+            message.setContent(cuerpo, "text/html");
+            Transport transport = session.getTransport("smtp");
+            transport.connect("smtp.gmail.com", remitente, clave);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+        }
+        catch (MessagingException me) {
+            me.printStackTrace();   //Si se produce un error
+        }
     }
     
-    public static void main(String[]args) throws Exception
-    {
+    /*
+    public static void main(String[] args) {
         Correo c = new Correo();
-        c.sendMessage("Hola","hola","tanufuki@gmail.com");
-        //System.out.println(operation(2, 2));
-        System.out.println("**************************");
-        System.out.println(antiguedad("2000-06-30"));
-        
-
-    }
-
-    /*private static Integer operation(int numero1, int numero2) {
-        paqueteServicio.Antiguedad_Service service = new paqueteServicio.Antiguedad_Service();
-        paqueteServicio.Antiguedad port = service.getAntiguedadPort();
-        return port.operation(numero1, numero2);
-    }¨*/
-
-    private static Integer antiguedad(java.lang.String fechaContrato) {
-        paqueteServicio.Antiguedad_Service service = new paqueteServicio.Antiguedad_Service();
-        paqueteServicio.Antiguedad port = service.getAntiguedadPort();
-        return port.antiguedad(fechaContrato);
-    }
-
-   
-                    
+        String destinatario =  "tanufuki@gmail.com"; //A quien le quieres escribir.
+        String asunto = "Su usuario para acceder a SGP";
+        String cuerpo = "Esta es una prueba de correo... desde la aplicacion de escritorio";
+        String clave = "1234";
+        enviarConGmail(destinatario, asunto, cuerpo,clave);
+    } 
+    */
 }

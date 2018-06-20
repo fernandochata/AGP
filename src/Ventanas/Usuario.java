@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import Modelo.DAO.Correo;
 import Modelo.DAO.UsuarioDAO;
 import Modelo.DTO.Cerrar;
 import static com.oracle.jrockit.jfr.Transition.To;
@@ -199,6 +200,19 @@ public class Usuario extends javax.swing.JFrame {
         ArrayList<String> resul = new ArrayList<String>(); 
         UsuarioDAO dao = new UsuarioDAO();
         resul = dao.obtener_cargos();
+        cbCargo.removeAllItems();
+        cbCargo.addItem("-Seleccione-");
+        for(int i=0; i<resul.size(); i++)
+        {
+            cbCargo.addItem(resul.get(i));
+        }
+    }
+    
+    public void actualizarJComboBoxCargoFuncionario(String cargo) throws Exception
+    {
+        ArrayList<String> resul = new ArrayList<String>(); 
+        UsuarioDAO dao = new UsuarioDAO();
+        resul = dao.obtener_cargos_por_perfil(cargo);
         cbCargo.removeAllItems();
         cbCargo.addItem("-Seleccione-");
         for(int i=0; i<resul.size(); i++)
@@ -451,6 +465,11 @@ public class Usuario extends javax.swing.JFrame {
 
         cbPerfil.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         cbPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbPerfil.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbPerfilFocusLost(evt);
+            }
+        });
 
         jLabel29.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel29.setText("Departamento:");
@@ -1105,7 +1124,7 @@ public class Usuario extends javax.swing.JFrame {
         char dv = digito_verificador.charAt(0);
         if(validarRut(rut,dv))
         {
-            JOptionPane.showMessageDialog(null, "R.U.N correcto");
+            //JOptionPane.showMessageDialog(null, "R.U.N correcto");
         }else
         {
             JOptionPane.showMessageDialog(null, "R.U.N incorrecto");
@@ -1165,6 +1184,20 @@ public class Usuario extends javax.swing.JFrame {
             //REGISTRAMOS EL NUEVO USUARIO
             JOptionPane.showMessageDialog(null,dao.registrar_usuario(u));
             //LIMPIAR EL FORMULARIO
+            
+            try
+            {
+                //ENVIAMOS CORREO ELECTRONICO CON CLAVE ADJUNTO
+                String asunto = "Su cuenta de usuario SGP";
+                String cuerpo = "Estimad@, su usuario para acceder al sistema web SGP esta lista, su usuario es su RUN <br> junto con la clave: <strong>" 
+                                    + u.getClave()+
+                                " </strong> <br> Le recomendamos modificar la clave de acceso a la brevedad";
+                Correo.enviarConGmail(u.getEmail(),asunto,cuerpo,clave+"");
+            }catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null,"Problemas al mandar correo electronico");
+            }
+            
             limpiar();
             txtRut.requestFocus();
         }
@@ -1172,7 +1205,7 @@ public class Usuario extends javax.swing.JFrame {
         
     }catch(Exception ex)
     {
-        JOptionPane.showMessageDialog(null,ex.getMessage());
+        //JOptionPane.showMessageDialog(null,ex.getMessage());
     }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -1455,6 +1488,30 @@ public class Usuario extends javax.swing.JFrame {
     private void dcFechaContratoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dcFechaContratoFocusLost
 
     }//GEN-LAST:event_dcFechaContratoFocusLost
+
+    private void cbPerfilFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbPerfilFocusLost
+    try
+    {
+        String cargo = cbPerfil.getSelectedItem().toString();
+        if(cargo.equals("FUNCIONARIO"))
+        {
+            actualizarJComboBoxCargoFuncionario(cargo);
+        }else if(cargo.equals("JEFE INTERNO"))
+        {
+            actualizarJComboBoxCargoFuncionario(cargo);
+        }else if(cargo.equals("JEFE SUPERIOR"))
+        {
+            actualizarJComboBoxCargoFuncionario(cargo);
+        }
+        else
+        {
+            actualizarJComboBoxCargo();
+        }
+    }catch(Exception ex)
+    {
+        
+    }
+    }//GEN-LAST:event_cbPerfilFocusLost
 
     /**
      * @param args the command line arguments

@@ -496,6 +496,42 @@ public class UsuarioDAO{
       return existe; //RETORNAMOS EL BOOLENAO
     }
     
+    public ArrayList obtener_cargos_por_perfil(String perfil) throws Exception //PARA CARGAR EL DROP DOWN LIST DE CARGOS, CON LOS CARGOS DE LA BD
+    {
+        ArrayList<String> cargos = new ArrayList<String>();
+        try
+        {
+            ResultSet resul = null;
+            String sql = null;
+            if(perfil.equals("-Seleccione-"))
+            {
+                sql = "SELECT * FROM USUARIO_CARGOS";
+            }else if(perfil.equals("FUNCIONARIO"))
+            {
+                sql = "SELECT * FROM USUARIO_CARGOS WHERE CARGO NOT LIKE 'DIRECTOR%' AND CARGO NOT LIKE 'JEFE%'";
+            }else if(perfil.equals("JEFE INTERNO"))
+            {
+                sql = "SELECT * FROM USUARIO_CARGOS WHERE CARGO LIKE 'JEFE UNIDAD'";
+            }else if(perfil.equals("JEFE SUPERIOR"))
+            {
+                sql = "SELECT * FROM USUARIO_CARGOS WHERE CARGO LIKE 'JEFE SUPERIOR'";
+            }else
+            {
+                sql = "SELECT * FROM USUARIO_CARGOS";
+            }
+            resul = instru.executeQuery(sql);
+            while(resul.next())
+            {
+                int contador = 0;
+                cargos.add(contador,resul.getString("cargo"));
+            }
+            return cargos;
+        }catch(SQLException ex)
+        {
+            throw new Exception(ex.getMessage());
+        }
+    }
+    
    /*public static void main(String[]args) throws Exception
     {
         try
